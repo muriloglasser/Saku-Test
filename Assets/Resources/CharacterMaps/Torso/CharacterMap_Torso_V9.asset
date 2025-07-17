@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf9734603580d94a9f9249e741e0f14, type: 3}
+  m_Name: CharacterMap_Torso_V9
+  m_EditorClassIdentifier: 
+  characterMapType: 5
+  id: Torso 9
+  price: 900
+  material: {fileID: 2100000, guid: b6d8d9fb9a75cd842b6c37694d2ebbb0, type: 2}
+  mesh: {fileID: -6201006056128192083, guid: 61c9a85b18292954790fded86a08f24e, type: 3}
+  materialOffset: {x: 0, y: 0}
+  cachedColor: 0

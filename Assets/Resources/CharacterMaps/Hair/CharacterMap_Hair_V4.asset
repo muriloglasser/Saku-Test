@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf9734603580d94a9f9249e741e0f14, type: 3}
+  m_Name: CharacterMap_Hair_V4
+  m_EditorClassIdentifier: 
+  characterMapType: 1
+  id: Hair 4
+  price: 500
+  material: {fileID: 2100000, guid: cb30a37ec15c80941873506b57db0dd9, type: 2}
+  mesh: {fileID: -2567650555017132842, guid: 85fb5d0c561b4d14589b52ce9c8c6d58, type: 3}
+  materialOffset: {x: 0, y: 0}
+  cachedColor: 0
