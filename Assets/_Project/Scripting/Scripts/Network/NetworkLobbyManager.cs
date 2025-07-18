@@ -22,7 +22,6 @@ public class NetworkLobbyManager : MonoBehaviour
     [SerializeField] private GameObject lobbyPanel;
     [SerializeField] private GameObject inGamePanel;
     [SerializeField] private GameObject loadingIndicator;
-    ///
     private string joinCode;
     private const int MaxPlayers = 100;
     private const string joinCodePattern = "^[6789BCDFGHJKLMNPQRTWbcdfghjklmnpqrtw]{6,12}$";

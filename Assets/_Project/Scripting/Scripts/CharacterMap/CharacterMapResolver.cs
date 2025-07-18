@@ -6,12 +6,11 @@ using static SaveManager;
 public class CharacterMapResolver : Initializer
 {
     [Header("Settings")]
-    [SerializeField] private CharacterMapSlot[] _slots;
-    
+    [SerializeField] private CharacterMapSlot[] _slots;    
     [Space(5)]
     [Header("References")]
-    public SaveManager saveManager;
-    
+    public SaveManager saveManager;    
+    [Space(5)]
     [Header("Default Maps")]
     private NetworkColorChanger cachedColorChanger;
     private NetworkMeshChanger cachedSkinedMeshChanger;

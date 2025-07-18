@@ -1,10 +1,19 @@
 # ninja log v5
 68	5192	7744159442031950	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1e85ad5bd8afae63
+5197	8673	7744159477887158	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	a2048cee74cd0c46
 1	5247	7744159443039260	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	bf1ff797c27105b9
 79	5271	7744159442700155	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e2795908ac2d6e73
+5248	8496	7744159475912453	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	43bbbba4228a22bb
 35	6203	7744159450833813	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ced87ce141e43cf2
+8674	8925	7744159480610102	C:/Saku/Saku-Test/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1q4u6k3b/obj/arm64-v8a/libgame.so	47965f1abf41bce1
 58	6984	7744159459730313	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	ca59856f8436e528
 45	7626	7744159466193310	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	1c82516cac26a28c
-5248	8496	7744159475912453	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	43bbbba4228a22bb
-5197	8673	7744159477887158	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	a2048cee74cd0c46
-8674	8925	7744159480610102	C:/Saku/Saku-Test/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1q4u6k3b/obj/arm64-v8a/libgame.so	47965f1abf41bce1
+71	3080	7745431104571180	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e2795908ac2d6e73
+26	3172	7745431105444713	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	bf1ff797c27105b9
+39	3339	7745431106829729	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1e85ad5bd8afae63
+49	3649	7745431110252723	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ced87ce141e43cf2
+60	3986	7745431114052552	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	ca59856f8436e528
+9	4057	7745431114889390	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	1c82516cac26a28c
+3081	4740	7745431121798885	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	43bbbba4228a22bb
+3176	4784	7745431122275081	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	a2048cee74cd0c46
+4784	5629	7745431130457472	C:/Saku/Saku-Test/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1q4u6k3b/obj/arm64-v8a/libgame.so	47965f1abf41bce1

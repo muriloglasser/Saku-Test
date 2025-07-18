@@ -8,7 +8,6 @@ public class CharacterMap : ScriptableObject
     public CharacterMapType characterMapType = CharacterMapType.none;
     public string id;
     public int price = 100;
-
     [Header("Visual Assets")]
     [Space(5)]
     public Material material;

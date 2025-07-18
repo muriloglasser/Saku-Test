@@ -10,37 +10,31 @@ public class UICharacterInventory : Initializer
 {
     [Header("Inventory Camera")]
     [SerializeField] private Camera inventoryCamera;
-    
     [Space(5)]
     [Header("Inventory Colors")]
     public Sprite lockedIcon;
     public List<BodyTypeButtonIcon> bodyTypeIcons = new();
     public List<Color> colors = new();
-    
     [Space(5)]
     [Header("Inventory Containers")]
     [SerializeField] private Transform typeButtonsContainer;
     [SerializeField] private Transform colorButtonsContainer;
     [SerializeField] private Transform mapsContainer;
-    
     [Space(5)]
     [Header("Inventory Prefabs")]
     [SerializeField] private GameObject typeButtonPrefab;
     [SerializeField] private GameObject mapButtonPrefab;
     [SerializeField] private GameObject colorButtonPrefab;
-    
     [Space(5)]
     [Header("Texts")]
     [SerializeField] private TMP_Text mapNameText;
     [SerializeField] private TMP_Text mapPriceText;
     [SerializeField] private TMP_Text currencyText;
-    
     [Space(5)]
     [Header("Buttons")]
     [SerializeField] private Button buyButton;
-    [SerializeField] private Button acquiredButton;
+    [SerializeField] private Button sellButton;
     [SerializeField] private Button customizeButton;
-
     private SaveManager saveManager;
     private Dictionary<CharacterMapType, UIInventoryButton> bodyTypeButtons = new();
     private Dictionary<UIInventoryButton, CharacterMapType> mapTypeButtons = new();
@@ -152,15 +146,20 @@ public class UICharacterInventory : Initializer
     /// <summary>
     /// Handles body type button click and updates the UI accordingly
     /// </summary>
-    public void OnBodyTypeButtonClicked(UIInventoryButton button, CharacterMapType characterMapType)
+    public void OnBodyTypeButtonClicked(UIInventoryButton button, CharacterMapType characterMapType, bool skipSelection = false)
     {
-        currentSelectedBodyType = characterMapType;
-        foreach (UIInventoryButton item in bodyTypeButtons.Values)
-        {
-            item.SetSelected(false);
-        }
 
-        button.SetSelected(true);
+        currentSelectedBodyType = characterMapType;
+
+        if (!skipSelection)
+        {
+            foreach (UIInventoryButton item in bodyTypeButtons.Values)
+            {
+                item.SetSelected(false);
+            }
+
+            button.SetSelected(true);
+        }
 
         int colorButtonSavedIndex = saveManager.GetSavedColorIndexByCharmapType(characterMapType);
         UIInventoryButton colorButtonTemp = colorButtons[colorButtonSavedIndex];
@@ -219,7 +218,18 @@ public class UICharacterInventory : Initializer
         if (isSelectedMapUnlocked)
         {
             buyButton.gameObject.SetActive(false);
-            acquiredButton.gameObject.SetActive(true);
+
+            CharacterMap mapTemp = SaveManager.GetCharacterMap(mapName, characterMapType);
+
+            if (saveManager.IsDefaultMap(mapTemp))
+                sellButton.interactable = false;
+            else
+                sellButton.interactable = true;
+
+            sellButton.gameObject.SetActive(true);
+
+            sellButton.onClick.RemoveAllListeners();
+            sellButton.onClick.AddListener(() => { OnSellButtonClicked(button, characterMapType, mapName); });
             button.SetIconImage(bodyTypeIcons.Where(c => c.characterMapType == characterMapType).First().icon);
             player.characterMapResolver.ApplyCharactermapByCharacterMapType(characterMapType, mapName);
         }
@@ -228,7 +238,7 @@ public class UICharacterInventory : Initializer
             buyButton.gameObject.SetActive(true);
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() => { OnBuyButtonClicked(button, characterMapType, mapName); });
-            acquiredButton.gameObject.SetActive(false);
+            sellButton.gameObject.SetActive(false);
             button.SetIconImage(lockedIcon);
         }
 
@@ -246,6 +256,18 @@ public class UICharacterInventory : Initializer
     {
         CharacterMap boughtMap = saveManager.TryToBuyMap(mapName, characterMapType);
         if (boughtMap != null) OnMapButtonClicked(button, characterMapType, mapName);
+    }
+
+    /// <summary>
+    /// Handles purchase attempts for locked maps
+    /// </summary>
+    public void OnSellButtonClicked(UIInventoryButton button, CharacterMapType characterMapType, string mapName)
+    {
+        CharacterMap soldMap = saveManager.TryToSellMap(mapName, characterMapType);
+        if (soldMap != null)
+        {
+            OnBodyTypeButtonClicked(mapTypeButtons.Where(c => c.Value == characterMapType).First().Key, characterMapType, true);
+        }
     }
 
     /// <summary>

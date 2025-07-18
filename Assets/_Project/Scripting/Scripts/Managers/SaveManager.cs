@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : Initializer
@@ -10,7 +11,6 @@ public class SaveManager : Initializer
     [Space(5)]
     [Header("Character Maps")]
     public static Dictionary<string, CharacterMap> _allCharacterMaps = new Dictionary<string, CharacterMap>();
-
     [Space(5)]
     [Header("Save Data")]
     public GameSaveData _currentGameData;
@@ -24,7 +24,16 @@ public class SaveManager : Initializer
         }
     }
     private string saveFileName = "gameSave.json";
-    private string backupSaveFileName = "gameSave_backup.json";
+    CharacterMapSaveData[] defaultMaps = {
+                new CharacterMapSaveData("CharacterMap_Cheek_V1", CharacterMapType.cheeks),
+                new CharacterMapSaveData("CharacterMap_Eye_V1", CharacterMapType.eyes),
+                new CharacterMapSaveData("CharacterMap_Hair_V1", CharacterMapType.hair),
+                new CharacterMapSaveData("CharacterMap_Leg_V1", CharacterMapType.legs),
+                new CharacterMapSaveData("CharacterMap_Mouth_V1", CharacterMapType.mouth),
+                new CharacterMapSaveData("CharacterMap_Shoes_V1", CharacterMapType.feet),
+                new CharacterMapSaveData("CharacterMap_Torso_V1", CharacterMapType.torso),
+                new CharacterMapSaveData("CharacterMap_Skin_V1", CharacterMapType.skin),
+            };
 
     #region Initialization
     /// <summary>
@@ -121,7 +130,20 @@ public class SaveManager : Initializer
     public string GetSelectedMapByBodyType(CharacterMapType characterMapType)
     {
         string mapNameTemp = null;
-        mapNameTemp = CurrentGameData.currentCharacterMaps.Where(c => c.characterMapType == characterMapType).First().name;
+
+        foreach (CharacterMapSaveData item in CurrentGameData.currentCharacterMaps)
+        {
+            if (item.characterMapType == CharacterMapType.none)
+                continue;
+            if (item.characterMapType == characterMapType)
+            {
+                mapNameTemp = item.name;
+                return mapNameTemp;
+            }
+
+        }
+
+        //mapNameTemp = CurrentGameData.currentCharacterMaps.Where(c => c.characterMapType == characterMapType).First().name;
         return mapNameTemp;
     }
 
@@ -148,6 +170,53 @@ public class SaveManager : Initializer
 
         return null;
     }
+
+    /// <summary>
+    /// Attempts to sell and unlock character map
+    /// </summary>
+    public CharacterMap TryToSellMap(string mapName, CharacterMapType characterMapType)
+    {
+        CharacterMap characterMap = GetCharacterMap(mapName, characterMapType);
+        CharacterMapSaveData characterMapSaveData = new CharacterMapSaveData(mapName, characterMapType);
+
+        if (characterMap == null)
+            return null;
+
+        if (IsDefaultMap(characterMap))
+            return null;
+
+        CharacterMapSaveData foundMap = null;
+        foreach (CharacterMapSaveData item in CurrentGameData.unlockedCharacterMaps)
+        {
+            if (item.name == mapName)
+            {
+                foundMap = item;
+                break;
+
+            }
+            else
+                continue;
+        }
+
+        if (foundMap != null)
+        {
+            CurrentGameData.currency += characterMap.price;
+            CurrentGameData.unlockedCharacterMaps.Remove(foundMap);
+            CurrentGameData.currentCharacterMaps.Remove(foundMap);
+            string defaultMapName = defaultMaps.Where(c => c.characterMapType == characterMapType).First().name;
+            CharacterMapSaveData defaultMapToReplace = new CharacterMapSaveData(defaultMapName, characterMapType);
+            CurrentGameData.unlockedCharacterMaps.Add(defaultMapToReplace);
+            CurrentGameData.currentCharacterMaps.Add(defaultMapToReplace);
+            return characterMap;
+
+        }
+
+
+        return null;
+    }
+
+
+
 
     /// <summary>
     /// Attempts to equip an unlocked character map
@@ -214,6 +283,25 @@ public class SaveManager : Initializer
         return characterMap;
     }
 
+    // Check if map is default
+
+    /// <summary>
+    /// Check if it is any default map
+    /// </summary>
+    public bool IsDefaultMap(CharacterMap characterMap)
+    {
+
+        foreach (CharacterMapSaveData item in defaultMaps)
+        {
+            if (item.name == characterMap.name)
+                return true;
+        }
+
+        return false;
+    }
+
+
+
     /// <summary>
     /// Gets a character map by name only
     /// </summary>
@@ -222,7 +310,7 @@ public class SaveManager : Initializer
         CharacterMap characterMap = null;
 
         foreach (CharacterMap item in _allCharacterMaps.Values)
-        {           
+        {
             if (item.name != mapName)
                 continue;
 
@@ -269,28 +357,11 @@ public class SaveManager : Initializer
     {
         if (!PlayerIsOwner())
             return;
-        try
-        {
-            string filePath = GetSaveFilePath(saveFileName);
-            string backupFilePath = GetSaveFilePath(backupSaveFileName);
 
-            if (File.Exists(filePath))
-            {
-                File.Copy(filePath, backupFilePath, true);
-            }
+        string filePath = GetSaveFilePath(saveFileName);
 
-            string jsonData = JsonUtility.ToJson(_currentGameData, true);
-            File.WriteAllText(filePath, jsonData);
-
-            PlayerPrefs.SetString("LastSave", DateTime.Now.ToString());
-            PlayerPrefs.Save();
-
-            Debug.Log("Game data saved successfully");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to save game data: " + e.Message);
-        }
+        string jsonData = JsonUtility.ToJson(_currentGameData, true);
+        File.WriteAllText(filePath, jsonData);
     }
 
     /// <summary>
@@ -301,35 +372,15 @@ public class SaveManager : Initializer
         if (!PlayerIsOwner())
             return null;
 
-        try
-        {
-            string filePath = GetSaveFilePath(saveFileName);
 
-            if (File.Exists(filePath))
-            {
-                string jsonData = File.ReadAllText(filePath);
-                return JsonUtility.FromJson<GameSaveData>(jsonData);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to load game data: " + e.Message);
+        string filePath = GetSaveFilePath(saveFileName);
 
-            try
-            {
-                string backupFilePath = GetSaveFilePath(backupSaveFileName);
-                if (File.Exists(backupFilePath))
-                {
-                    string jsonData = File.ReadAllText(backupFilePath);
-                    Debug.Log("Loaded game data from backup");
-                    return JsonUtility.FromJson<GameSaveData>(jsonData);
-                }
-            }
-            catch (Exception backupEx)
-            {
-                Debug.LogError("Failed to load backup game data: " + backupEx.Message);
-            }
+        if (File.Exists(filePath))
+        {
+            string jsonData = File.ReadAllText(filePath);
+            return JsonUtility.FromJson<GameSaveData>(jsonData);
         }
+
 
         Debug.LogWarning("Loading failed, creating new save data");
         return new GameSaveData();
@@ -343,7 +394,9 @@ public class SaveManager : Initializer
         return Path.Combine(Application.persistentDataPath, fileName);
     }
     #endregion
-    #region SubClasses
+}
+
+
     [Serializable]
     public class GameSaveData
     {
@@ -411,5 +464,3 @@ public class SaveManager : Initializer
             this.colorIndex = colorIndex;
         }
     }
-    #endregion
-}

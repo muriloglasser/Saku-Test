@@ -1513,7 +1513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acquired
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3694,7 +3694,7 @@ MonoBehaviour:
   mapPriceText: {fileID: 1296315178602633524}
   currencyText: {fileID: 619979106138613751}
   buyButton: {fileID: 7849960388764215621}
-  acquiredButton: {fileID: 6997502657747728487}
+  sellButton: {fileID: 6997502657747728487}
   customizeButton: {fileID: 2174065868571114720}
 --- !u!1 &7510887783207508297
 GameObject:
@@ -3909,7 +3909,7 @@ GameObject:
   - component: {fileID: 5532053429469124720}
   - component: {fileID: 6997502657747728487}
   m_Layer: 0
-  m_Name: Button_Acquired
+  m_Name: Button_Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4012,7 +4012,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 5532053429469124720}
   m_OnClick:
     m_PersistentCalls:

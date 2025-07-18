@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1512507096
+  GlobalObjectIdHash: 2437981690
   InScenePlacedSourceGlobalObjectIdHash: 2437981690
   DeferredDespawnTick: 0
   Ownership: 1
@@ -283,7 +283,6 @@ GameObject:
   m_Component:
   - component: {fileID: 895320302490541934}
   - component: {fileID: 460291561337300737}
-  - component: {fileID: 1445670330179223490}
   - component: {fileID: 6925971363185355759}
   m_Layer: 0
   m_Name: InventoryCamera
@@ -358,14 +357,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1445670330179223490
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8198566758656877195}
-  m_Enabled: 1
 --- !u!114 &6925971363185355759
 MonoBehaviour:
   m_ObjectHideFlags: 0

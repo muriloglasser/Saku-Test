@@ -10,16 +10,13 @@ public class Player : NetworkBehaviour
     public SaveManager saveManager;
     public CharacterMapResolver characterMapResolver;
     public UICharacterInventory characterInventory;
-
     [Header("Movement Settings")]
     [Space(5)]
     [SerializeField] private float speed = 5f;
-
     [Header("Animation Settings")]
     [Space(5)]
     [SerializeField] private Animator animator;
     [SerializeField] private float movementThreshold = 0.1f;
-
     private readonly NetworkVariable<bool> netIsWalking = new NetworkVariable<bool>(
         false,
         NetworkVariableReadPermission.Everyone,
@@ -70,7 +67,6 @@ public class Player : NetworkBehaviour
         }
     }
     #endregion
-
     #region Update Methods
     private void Update()
     {
@@ -103,20 +99,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     private void HandleInput()
     {
-        movementDirection = Vector3.zero;
-
-#if ENABLE_INPUT_SYSTEM && NEW_INPUT_SYSTEM_INSTALLED
-        if (Keyboard.current.aKey.isPressed) movementDirection.x -= 1;
-        if (Keyboard.current.dKey.isPressed) movementDirection.x += 1;
-        if (Keyboard.current.wKey.isPressed) movementDirection.z += 1;
-        if (Keyboard.current.sKey.isPressed) movementDirection.z -= 1;
-#else
-        if (Input.GetKey(KeyCode.A)) movementDirection.x -= 1;
-        if (Input.GetKey(KeyCode.D)) movementDirection.x += 1;
-        if (Input.GetKey(KeyCode.W)) movementDirection.z += 1;
-        if (Input.GetKey(KeyCode.S)) movementDirection.z -= 1;
-#endif
-        
+        movementDirection = Vector3.zero;        
         uiJoystick.LockJoyStick(false);
         movementDirection.x = uiJoystick.Direction.x;
         movementDirection.z = uiJoystick.Direction.y;
@@ -145,7 +128,6 @@ public class Player : NetworkBehaviour
         }
     }
     #endregion
-
     #region Animation Methods
     /// <summary>
     /// Called when the network walking state changes
