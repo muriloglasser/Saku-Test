@@ -23,7 +23,6 @@ public class Initializer : MonoBehaviour
         this._player = player;
     }
     #endregion
-
     #region Player Validation
     /// <summary>
     /// Checks if the local player is the owner of this instance

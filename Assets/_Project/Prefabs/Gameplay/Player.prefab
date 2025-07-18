@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2437981690
+  GlobalObjectIdHash: 1512507096
   InScenePlacedSourceGlobalObjectIdHash: 2437981690
   DeferredDespawnTick: 0
   Ownership: 1
@@ -418,10 +418,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7394647344276032481}
     m_Modifications:
-    - target: {fileID: 1502022969997562234, guid: 558ae90dc7ce0ca4f862f3960086d516, type: 3}
-      propertyPath: m_Name
-      value: UIJoystick
-      objectReference: {fileID: 0}
     - target: {fileID: 1623495428727889213, guid: 558ae90dc7ce0ca4f862f3960086d516, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

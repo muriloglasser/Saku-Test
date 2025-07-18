@@ -3,9 +3,11 @@ using UnityEngine;
 using Unity.Collections;
 
 public class NetworkMeshChanger : NetworkBehaviour
-{  
+{
     private NetworkVariable<FixedString64Bytes> networkMapName = new NetworkVariable<FixedString64Bytes>();
     private SkinnedMeshRenderer meshRenderer;
+    private const string overrideColorPropertie = "_OverrideColor";
+    private Color lastColor;
 
     #region Unity Callbacks
     private void Awake()
@@ -37,18 +39,18 @@ public class NetworkMeshChanger : NetworkBehaviour
     private void ApplyMap(string mapName)
     {
         if (string.IsNullOrEmpty(mapName)) return;
-        
+
         CharacterMap mapTemp = SaveManager.GetCharacterMap(mapName);
         if (mapTemp != null && mapTemp.mesh != null)
         {
             meshRenderer.sharedMesh = mapTemp.mesh;
-            Color lastColor = meshRenderer.material.GetColor("_OverrideColor");
+            lastColor = meshRenderer.material.GetColor(overrideColorPropertie);
             meshRenderer.material = mapTemp.material;
-            meshRenderer.material.SetColor("_OverrideColor", lastColor);
+            meshRenderer.material.SetColor(overrideColorPropertie, lastColor);
         }
         else
         {
-            Debug.LogWarning($"Mapa '{mapName}' não encontrado ou mesh inválido!");
+            Debug.LogWarning($"Map '{mapName}' not found!");
         }
     }
     #endregion
@@ -69,7 +71,7 @@ public class NetworkMeshChanger : NetworkBehaviour
     {
         if (string.IsNullOrEmpty(newMapName))
         {
-            Debug.LogError("Nome do mapa não pode ser vazio!");
+            Debug.LogError("Map name can not be empty");
             return;
         }
 

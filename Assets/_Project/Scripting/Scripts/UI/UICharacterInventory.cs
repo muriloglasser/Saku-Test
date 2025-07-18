@@ -57,7 +57,6 @@ public class UICharacterInventory : Initializer
         customizeButton.gameObject.SetActive(true);
     }
     #endregion
-
     #region Inventory Management
     /// <summary>
     /// Toggles the inventory visibility
@@ -87,7 +86,6 @@ public class UICharacterInventory : Initializer
         inventoryCamera.gameObject.SetActive(false);
     }
     #endregion
-
     #region Button Management
     /// <summary>
     /// Instantiates all inventory buttons (body types, colors and maps)
@@ -150,7 +148,6 @@ public class UICharacterInventory : Initializer
         }
     }
     #endregion
-
     #region Button Actions
     /// <summary>
     /// Handles body type button click and updates the UI accordingly
@@ -241,7 +238,6 @@ public class UICharacterInventory : Initializer
         UpdateTexts(selectedMap.id, selectedMap.price);
     }
     #endregion
-
     #region Purchase System
     /// <summary>
     /// Handles purchase attempts for locked maps

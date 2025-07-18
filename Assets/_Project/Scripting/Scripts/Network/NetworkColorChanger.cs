@@ -5,6 +5,7 @@ public class NetworkColorChanger : NetworkBehaviour
 {  
     private NetworkVariable<Color> networkColor = new NetworkVariable<Color>();
     private SkinnedMeshRenderer meshRenderer;
+    private const string overrideColorPropertie = "_OverrideColor";
 
     #region Unity Callbacks
     private void Awake()
@@ -25,7 +26,7 @@ public class NetworkColorChanger : NetworkBehaviour
     {
         if (networkColor.Value != default)
         {
-            meshRenderer.material.SetColor("_OverrideColor", networkColor.Value);
+            meshRenderer.material.SetColor(overrideColorPropertie, networkColor.Value);
         }
     }
 
@@ -34,7 +35,7 @@ public class NetworkColorChanger : NetworkBehaviour
     /// </summary>
     private void OnColorChanged(Color oldColor, Color newColor)
     {
-        meshRenderer.material.SetColor("_OverrideColor", newColor);
+        meshRenderer.material.SetColor(overrideColorPropertie, newColor);
     }
     #endregion
     #region Public Methods

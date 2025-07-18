@@ -27,7 +27,6 @@ public class CharacterMapResolver : Initializer
         InitializeCharacterColors();
     }
     #endregion
-
     #region Character Color Methods
     /// <summary>
     /// Initializes all character colors from saved data
@@ -50,7 +49,6 @@ public class CharacterMapResolver : Initializer
         cachedColorChanger.ChangeColor(color);
     }
     #endregion
-
     #region Character Mesh Methods
     /// <summary>
     /// Initializes all character meshes from saved data

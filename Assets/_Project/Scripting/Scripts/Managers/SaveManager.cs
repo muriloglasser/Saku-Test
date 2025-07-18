@@ -23,7 +23,6 @@ public class SaveManager : Initializer
             return _currentGameData;
         }
     }
-
     private string saveFileName = "gameSave.json";
     private string backupSaveFileName = "gameSave_backup.json";
 
@@ -59,7 +58,6 @@ public class SaveManager : Initializer
         }
     }
     #endregion
-
     #region Save Management
     /// <summary>
     /// Loads existing save file or creates a new one if none exists
@@ -101,7 +99,6 @@ public class SaveManager : Initializer
         return File.Exists(filePath);
     }
     #endregion
-
     #region Character Map Operations
     /// <summary>
     /// Checks if a character map is unlocked
@@ -234,7 +231,6 @@ public class SaveManager : Initializer
         return characterMap;
     }
     #endregion
-
     #region Color Operations
     /// <summary>
     /// Gets the saved color index for a specific character map type
@@ -265,7 +261,6 @@ public class SaveManager : Initializer
         SaveData();
     }
     #endregion
-
     #region File Operations
     /// <summary>
     /// Saves the current game data to file with backup
@@ -348,7 +343,6 @@ public class SaveManager : Initializer
         return Path.Combine(Application.persistentDataPath, fileName);
     }
     #endregion
-
     #region SubClasses
     [Serializable]
     public class GameSaveData

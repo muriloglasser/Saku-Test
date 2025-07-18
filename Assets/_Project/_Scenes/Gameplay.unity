@@ -463,6 +463,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 350694474159568368, guid: fb0a4086df061e04995e354574088e21, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 123.069336
+      objectReference: {fileID: 0}
+    - target: {fileID: 350694474159568368, guid: fb0a4086df061e04995e354574088e21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60.94409
+      objectReference: {fileID: 0}
     - target: {fileID: 927335919990058096, guid: fb0a4086df061e04995e354574088e21, type: 3}
       propertyPath: m_Name
       value: Text_JoinCode
@@ -519,9 +527,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Lobby
       objectReference: {fileID: 0}
+    - target: {fileID: 3913180872730828400, guid: fb0a4086df061e04995e354574088e21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.814697
+      objectReference: {fileID: 0}
     - target: {fileID: 4282903150175587825, guid: fb0a4086df061e04995e354574088e21, type: 3}
       propertyPath: m_Name
       value: NetworkLobyManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457268435648881825, guid: fb0a4086df061e04995e354574088e21, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -198.05762
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457268435648881825, guid: fb0a4086df061e04995e354574088e21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 69.507324
       objectReference: {fileID: 0}
     - target: {fileID: 6389428582474443873, guid: fb0a4086df061e04995e354574088e21, type: 3}
       propertyPath: m_Name

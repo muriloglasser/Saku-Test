@@ -13,7 +13,6 @@ public class CharacterMap : ScriptableObject
     [Space(5)]
     public Material material;
     public Mesh mesh;
-    public Vector2 materialOffset = Vector2.zero;
 }
 
 public enum CharacterMapType

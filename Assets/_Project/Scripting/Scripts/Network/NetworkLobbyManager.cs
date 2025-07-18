@@ -23,9 +23,9 @@ public class NetworkLobbyManager : MonoBehaviour
     [SerializeField] private GameObject inGamePanel;
     [SerializeField] private GameObject loadingIndicator;
     ///
-    private string _joinCode;
+    private string joinCode;
     private const int MaxPlayers = 100;
-    private const string JoinCodePattern = "^[6789BCDFGHJKLMNPQRTWbcdfghjklmnpqrtw]{6,12}$";
+    private const string joinCodePattern = "^[6789BCDFGHJKLMNPQRTWbcdfghjklmnpqrtw]{6,12}$";
 
     #region Unity Callbacks
     private void Awake()
@@ -100,7 +100,7 @@ public class NetworkLobbyManager : MonoBehaviour
             UpdateStatus("");
 
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
-            _joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(
                 allocation.RelayServer.IpV4,
@@ -113,8 +113,8 @@ public class NetworkLobbyManager : MonoBehaviour
 
             if (NetworkManager.Singleton.StartHost())
             {
-                joinCodeText.text = $"Join Code: {_joinCode}";
-                UpdateStatus($"Hosting game with code: {_joinCode}");
+                joinCodeText.text = $"Join Code: {joinCode}";
+                UpdateStatus($"Hosting game with code: {joinCode}");
                 SwitchToInGameUI();
             }
             else
@@ -295,7 +295,7 @@ public class NetworkLobbyManager : MonoBehaviour
     /// </summary>
     private bool IsValidJoinCode(string code)
     {
-        return System.Text.RegularExpressions.Regex.IsMatch(code, JoinCodePattern);
+        return System.Text.RegularExpressions.Regex.IsMatch(code, joinCodePattern);
     }
 
     /// <summary>

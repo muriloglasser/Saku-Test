@@ -22,7 +22,6 @@ public class UIJoystick : MonoBehaviour
         CheckJoystickInput();
     }
     #endregion
-
     #region Joystick Control
     /// <summary>
     /// Handles all joystick input logic including touch detection and phase handling
@@ -85,7 +84,6 @@ public class UIJoystick : MonoBehaviour
         isJoystickActive = state;
     }
     #endregion
-
     #region Public Methods
     /// <summary>
     /// Locks or unlocks joystick functionality
